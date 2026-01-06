@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>promptconvert</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <header>
+        <h1>promptconvert</h1>
+        <p class="subtitle">Turn messy prompts into production-grade system prompts using your chosen model API.</p>
+      </header>
+
+      <label class="field">
+        <span class="label">Messy / casual prompt</span>
+        <textarea id="promptInput" rows="8" placeholder="Paste or type the raw user request here..."></textarea>
+      </label>
+
+      <div class="actions">
+        <button id="convertButton">Get System Prompt</button>
+        <span class="hint">Backend uses your local API key and provider settings from .env</span>
+      </div>
+
+      <label class="field">
+        <span class="label">Generated system prompt</span>
+        <div class="output-row">
+          <textarea id="output" rows="10" readonly placeholder="Your crafted system prompt will appear here"></textarea>
+          <button id="copyButton" class="secondary" aria-label="Copy output">Copy</button>
+        </div>
+      </label>
+
+      <p class="footnote">
+        The system prompt is built from a fixed architect template and your messy prompt. Nothing is stored; all requests run against your configured model provider.
+      </p>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

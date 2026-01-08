@@ -17,7 +17,7 @@ dist_dir = Path(__file__).resolve().parent.parent
 static_dir = dist_dir / "static"
 templates_dir = dist_dir / "templates"
 
-app = FastAPI(title="promptconvert", version="0.1.0")
+app = FastAPI(title="System Prompt Generator", version="0.1.0")
 app.mount("/static", StaticFiles(directory=static_dir), name="static")
 
 

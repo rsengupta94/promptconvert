@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 MODEL_PROVIDER=openai
 OPENAI_API_KEY=sk-...
-OPENAI_MODEL=gpt-3.5-turbo
+OPENAI_MODEL=gpt-4o-mini
 # Optional: override base URL if you proxy
 # OPENAI_BASE_URL=https://api.openai.com/v1
 ```
@@ -29,7 +29,7 @@ OPENAI_MODEL=gpt-3.5-turbo
 ```
 MODEL_PROVIDER=openai_compatible
 LLM_API_KEY=your-key-here
-LLM_MODEL=gpt-3.5-turbo
+LLM_MODEL=gpt-4o-mini
 LLM_BASE_URL=https://your-endpoint/v1
 ```
 

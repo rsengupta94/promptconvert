@@ -1,6 +1,6 @@
-# promptconvert
+# System Prompt Generator
 
-A localhost tool that turns messy/casual user prompts into production-grade system prompts using a fixed architect template. Runs with your own API keys and supports both OpenAI and any OpenAI-compatible endpoint (configurable via `.env`).
+A localhost tool that turns messy/casual user prompts into production-grade system prompts using a fixed architect template. Runs with your own API keys. Presently supports both OpenAI and any OpenAI-compatible endpoint (configurable via `.env`).
 
 ## Quickstart
 

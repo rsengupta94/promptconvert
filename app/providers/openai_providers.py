@@ -63,21 +63,3 @@ class OpenAIProvider(ModelProvider):
 
     def generate_system_prompt(self, user_prompt: str) -> str:
         return self.client.generate(user_prompt)
-
-
-class OpenAICompatibleProvider(ModelProvider):
-    def __init__(self, settings: Settings):
-        if not settings.llm_api_key:
-            raise ValueError("LLM_API_KEY must be set for openai_compatible provider.")
-        if not settings.llm_base_url:
-            raise ValueError("LLM_BASE_URL must be set for openai_compatible provider.")
-        if not settings.llm_model:
-            raise ValueError("LLM_MODEL must be set for openai_compatible provider.")
-        self.client = _BaseOpenAIClient(
-            api_key=settings.llm_api_key,
-            base_url=settings.llm_base_url,
-            model=settings.llm_model,
-        )
-
-    def generate_system_prompt(self, user_prompt: str) -> str:
-        return self.client.generate(user_prompt)

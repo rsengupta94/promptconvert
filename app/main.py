@@ -7,10 +7,8 @@ from pydantic import BaseModel, Field
 
 from app.config import Settings
 from app.providers.base import ModelProvider
-from app.providers.openai_providers import (
-    OpenAICompatibleProvider,
-    OpenAIProvider,
-)
+from app.providers.openai_providers import OpenAIProvider
+from app.providers.gemini_provider import GeminiProvider
 
 
 dist_dir = Path(__file__).resolve().parent.parent
@@ -34,8 +32,8 @@ settings.validate_for_provider()
 
 if settings.model_provider == "openai":
     provider: ModelProvider = OpenAIProvider(settings)
-elif settings.model_provider == "openai_compatible":
-    provider = OpenAICompatibleProvider(settings)
+elif settings.model_provider == "gemini":
+    provider = GeminiProvider(settings)
 else:
     raise RuntimeError(f"Unsupported provider: {settings.model_provider}")
 

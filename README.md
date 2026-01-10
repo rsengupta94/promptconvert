@@ -1,6 +1,6 @@
 # System Prompt Generator
 
-A localhost tool that turns messy/casual user prompts into production-grade system prompts using a fixed architect template. Runs with your own API keys. Presently supports both OpenAI and any OpenAI-compatible endpoint (configurable via `.env`).
+A localhost tool that turns messy/casual user prompts into production-grade system prompts using a fixed architect template. Runs with your own API keys. Supports OpenAI (GPT 4o mini) and Gemini (Google AI Studio - Gemini 2.5 flash) (configurable via `.env`).
 
 ## Quickstart
 
@@ -24,13 +24,14 @@ OPENAI_MODEL=gpt-4o-mini
 # OPENAI_BASE_URL=https://api.openai.com/v1
 ```
 
-- **OpenAI-compatible endpoint** (self-hosted or third-party that speaks the chat/completions API)
+- **Gemini** (Google AI Studio API key)
 
 ```
-MODEL_PROVIDER=openai_compatible
-LLM_API_KEY=your-key-here
-LLM_MODEL=gpt-4o-mini
-LLM_BASE_URL=https://your-endpoint/v1
+MODEL_PROVIDER=gemini
+GEMINI_API_KEY=your-key-here
+GEMINI_MODEL=gemini-2.5-flash
+# Optional: override base URL if needed
+# GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta
 ```
 
 > `.env` is gitignored. Keep your keys local.
@@ -49,12 +50,12 @@ uvicorn app.main:app --reload
 
 ## How it works
 
-- The server builds a messages array:
-  - `system`: the provided architect JSON template (fixed).
-  - `user`: your messy prompt + a short instruction to produce only the crafted system prompt.
+- The backend sends:
+  - a fixed architect template as the "system instruction"
+  - your messy prompt + a short instruction to return only the crafted system prompt
 - Providers:
   - `openai` → uses `OPENAI_API_KEY`, `OPENAI_MODEL`, `OPENAI_BASE_URL`.
-  - `openai_compatible` → uses `LLM_API_KEY`, `LLM_MODEL`, `LLM_BASE_URL`.
+  - `gemini` → uses `GEMINI_API_KEY` (AI Studio key), `GEMINI_MODEL`, `GEMINI_BASE_URL`.
 - The response is the model-generated system prompt, shown in the UI with a Copy button.
 
 ## Project layout
@@ -66,7 +67,8 @@ app/
   system_prompt.py      # Architect template constants
   providers/
     base.py             # Provider interface
-    openai_providers.py # OpenAI + OpenAI-compatible implementations
+    openai_providers.py # OpenAI implementation
+    gemini_provider.py  # Gemini (Google AI Studio) implementation
 static/
   styles.css
   app.js
@@ -86,3 +88,5 @@ requirements.txt
 
 - No data is persisted; requests go directly from your browser to the FastAPI backend, then to your configured model.
 - To add another provider, implement `ModelProvider` in `app/providers` and extend the selection logic in `app/main.py`.
+
+For any feedback, feel free to reach out to me. Cheers! - Rajarshi (https://github.com/rsengupta94)
